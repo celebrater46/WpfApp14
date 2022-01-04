@@ -5,22 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp14"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <StackPanel>
-        <Menu x:Name="menu" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5">
+        Title="Zip List" Height="350" Width="525" ResizeMode="CanResizeWithGrip">
+    <Grid Margin="0,0,0,3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="33" />
+            <RowDefinition Height="267" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" >
             <MenuItem Header="File(_F)">
                 <MenuItem x:Name="openMenu" Header="Open(_O)" Click="OpenBtClick" />
-                <Separator />
                 <MenuItem x:Name="exitMenu" Header="Exit(_X)" Click="CloseBtClick" />
             </MenuItem>
-            
             <MenuItem Header="Edit(_E)">
-                <MenuItem x:Name="clearMenu" Header="Clear(_C)" Click="ClearBtClick" />
+                <MenuItem x:Name="clearMenu" Header="Clear(_C)" Click="ClearBtClick"/>
             </MenuItem>
-
-            <!-- <MenuItem x:Name="Test" Header="testMenu" Click="Test_Click" IsEnabled={Binding IsEnabled} /> -->
         </Menu>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Width="400" Height="200" Margin="5">
+        <ListView x:Name="listView" ItemsSource="{Binding Mode=OneWay}" Grid.Row="1">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Zip}" Header="Zip" />
@@ -32,5 +32,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-    </StackPanel>
+
+    </Grid>
 </Window>
