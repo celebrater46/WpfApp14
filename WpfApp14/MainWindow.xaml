@@ -6,7 +6,31 @@
         xmlns:local="clr-namespace:WpfApp14"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <Menu x:Name="menu" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5">
+            <MenuItem Header="File(_F)">
+                <MenuItem x:Name="openMenu" Header="Open(_O)" Click="OpenBtClick" />
+                <Separator />
+                <MenuItem x:Name="exitMenu" Header="Exit(_X)" Click="CloseBtClick" />
+            </MenuItem>
+            
+            <MenuItem Header="Edit(_E)">
+                <MenuItem x:Name="clearMenu" Header="Clear(_C)" Click="ClearBtClick" />
+            </MenuItem>
+
+            <!-- <MenuItem x:Name="Test" Header="testMenu" Click="Test_Click" IsEnabled={Binding IsEnabled} /> -->
+        </Menu>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Width="400" Height="200" Margin="5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Zip}" Header="Zip" />
+                    <GridViewColumn DisplayMemberBinding="{Binding State}" Header="State" />
+                    <GridViewColumn DisplayMemberBinding="{Binding City}" Header="City" />
+                    <GridViewColumn DisplayMemberBinding="{Binding CityKana}" Header="CityK" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Town}" Header="Town" />
+                    <GridViewColumn DisplayMemberBinding="{Binding TownKana}" Header="TownK" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </StackPanel>
 </Window>
