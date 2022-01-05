@@ -83,9 +83,14 @@ namespace WpfApp14
                 // this.IsEnabled = false; 
                 // ReadCsv(dlg.FileName);
                 // this.IsEnabled = true;
+                
                 SetLoadingUi(true);
                 await ReadCsvTask(dlg.FileName);
                 SetLoadingUi(false);
+                
+                // SetLoadingUi(true);
+                // await ReadCsvTask(dlg.FileName);
+                // SetLoadingUi(false);
             }
         }
 
@@ -104,11 +109,56 @@ namespace WpfApp14
             this.IsEnabled = false;
         }
 
+        // private void SetLoadingUi(bool loading)
+        // {
+        // private void SetLoadingUi(bool loading)
+        // {
+        //     // if (loading)
+        //     // {
+        //     //     // Make the display invalid
+        //     //     // this.IsEnabled = !loading;
+        //     //     // loadingText.Visibility = Visibility.Visible;
+        //     //     // listView.Visibility = Visibility.Collapsed;
+        //     //     // taskbarInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
+        //     //     
+        //     //     this.IsEnabled = !loading;
+        //     //     loadingText.Visibility = Visibility.Visible;
+        //     //     listView.Visibility = Visibility.Collapsed;
+        //     //     taskbarInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
+        //     // }
+        //     // else
+        //     // {
+        //     //     // this.IsEnabled = !loading;
+        //     //     // loadingText.Visibility = Visibility.Collapsed;
+        //     //     // listView.Visibility = Visibility.Visible;
+        //     //     // taskbarInfo.ProgressState = TaskbarItemProgressState.None;
+        //     //     
+        //     //     this.IsEnabled = !loading;
+        //     //     loadingText.Visibility = Visibility.Collapsed;
+        //     //     listView.Visibility = Visibility.Visible;
+        //     //     taskbarInfo.ProgressState = TaskbarItemProgressState.None;
+        //     // }
+        //     
+        //     if (loading)
+        //     {
+        //         this.IsEnabled = !loading;
+        //         loadingText.Visibility = Visibility.Visible;
+        //         listView.Visibility = Visibility.Collapsed;
+        //         taskbarInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
+        //     }
+        //     else
+        //     {
+        //         this.IsEnabled = !loading;
+        //         loadingText.Visibility = Visibility.Collapsed;
+        //         listView.Visibility = Visibility.Visible;
+        //         taskbarInfo.ProgressState = TaskbarItemProgressState.None;
+        //     }
+        // }
+        
         private void SetLoadingUi(bool loading)
         {
             if (loading)
             {
-                // Make the display invalid
                 this.IsEnabled = !loading;
                 loadingText.Visibility = Visibility.Visible;
                 listView.Visibility = Visibility.Collapsed;
