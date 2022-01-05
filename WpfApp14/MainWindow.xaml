@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:WpfApp14"
         mc:Ignorable="d"
         Title="Zip List" Height="350" Width="525" ResizeMode="CanResizeWithGrip">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo x:Name="taskbarInfo"/>
+    </Window.TaskbarItemInfo>
     <Grid Margin="0,0,0,3">
         <Grid.RowDefinitions>
             <RowDefinition Height="33" />
@@ -33,5 +36,6 @@
             </ListView.View>
         </ListView>
 
+        <TextBlock x:Name="loadingText" TextWrapping="Wrap" Grid.Row="1" Text="Now Loading..." HorizontalAlignment="Center" FontSize="48" Visibility="Collapsed" />
     </Grid>
 </Window>

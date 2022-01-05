@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
+using System.Windows.Shell;
 
 namespace WpfApp14
 {
@@ -18,6 +21,8 @@ namespace WpfApp14
             
             this.ZipRecords = new ObservableCollection<ZipRecord>();
             listView.DataContext = this.ZipRecords;
+            
+            BindingOperations.EnableCollectionSynchronization(this.ZipRecords, new object());
         }
 
         private void ReadCsv(string filePath)
@@ -65,7 +70,8 @@ namespace WpfApp14
             }
         }
 
-        private void OpenBtClick(object sender, RoutedEventArgs e)
+        // private void OpenBtClick(object sender, RoutedEventArgs e)
+        private async void OpenBtClick(object sender, RoutedEventArgs e)
         {
             var dlg = new Microsoft.Win32.OpenFileDialog();
 
@@ -74,9 +80,12 @@ namespace WpfApp14
 
             if (dlg.ShowDialog() == true)
             {
-                this.IsEnabled = false; 
-                ReadCsv(dlg.FileName);
-                this.IsEnabled = true;
+                // this.IsEnabled = false; 
+                // ReadCsv(dlg.FileName);
+                // this.IsEnabled = true;
+                SetLoadingUi(true);
+                await ReadCsvTask(dlg.FileName);
+                SetLoadingUi(false);
             }
         }
 
@@ -93,6 +102,30 @@ namespace WpfApp14
         private void Test_Click(object sender, RoutedEventArgs e)
         {
             this.IsEnabled = false;
+        }
+
+        private void SetLoadingUi(bool loading)
+        {
+            if (loading)
+            {
+                // Make the display invalid
+                this.IsEnabled = !loading;
+                loadingText.Visibility = Visibility.Visible;
+                listView.Visibility = Visibility.Collapsed;
+                taskbarInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
+            }
+            else
+            {
+                this.IsEnabled = !loading;
+                loadingText.Visibility = Visibility.Collapsed;
+                listView.Visibility = Visibility.Visible;
+                taskbarInfo.ProgressState = TaskbarItemProgressState.None;
+            }
+        }
+
+        private Task ReadCsvTask(string filePath)
+        {
+            return Task.Run(() => { ReadCsv(filePath);});
         }
     }
 }
